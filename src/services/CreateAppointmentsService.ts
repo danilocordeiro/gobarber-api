@@ -4,12 +4,12 @@ import { getCustomRepository } from 'typeorm';
 import { startOfHour } from 'date-fns';
 
 interface Request {
-  provider: string;
+  provider_id: string;
   date: Date;
 }
 
 export default class CreateAppointmentService {
-  public async execute({ date, provider }: Request): Promise<Appointment> {
+  public async execute({ date, provider_id }: Request): Promise<Appointment> {
     const appointmentRespository = getCustomRepository(AppointmentRespository);
 
     const appointmentDate = startOfHour(date);
@@ -23,7 +23,7 @@ export default class CreateAppointmentService {
     }
 
     const appointment = appointmentRespository.create({
-      provider,
+      provider_id,
       date: appointmentDate,
     });
 
